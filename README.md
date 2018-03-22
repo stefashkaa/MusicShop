@@ -1,2 +1,2 @@
 # MusicShop
-Simple Java FX application
+Simple Java FX application (laboratory work)
