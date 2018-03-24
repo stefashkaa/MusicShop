@@ -15,8 +15,11 @@ public class CompositionWindow extends JFrame {
     private JButton addButton;
     private JButton editButton;
     private JButton deleteButton;
-    private JButton selectButton;
-    private JButton backButton;
+    private JButton sortedButton;
+    private JButton getListButton;
+    private JButton getColumnNames;
+    private JButton getTableNames;
+
 
     public CompositionWindow(CompositionTableModel compositionModel){
 
@@ -105,11 +108,11 @@ public class CompositionWindow extends JFrame {
             }
         });
 
-        selectButton = new JButton("Sorted");
-        add(selectButton);
-        selectButton.setBounds(10, 180, 220, 30);
+        sortedButton = new JButton("Sorted");
+        add(sortedButton);
+        sortedButton.setBounds(10, 180, 220, 30);
 
-        selectButton.addActionListener(new ActionListener() {
+        sortedButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 model.setAll(model.getSortedList());
@@ -118,11 +121,11 @@ public class CompositionWindow extends JFrame {
             }
         });
 
-        backButton = new JButton("All");
-        add(backButton);
-        backButton.setBounds(240, 180, 220, 30);
+        getListButton = new JButton("All");
+        add(getListButton);
+        getListButton.setBounds(240, 180, 220, 30);
 
-        backButton.addActionListener(new ActionListener() {
+        getListButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 model.setAll(model.all());
@@ -131,8 +134,30 @@ public class CompositionWindow extends JFrame {
             }
         });
 
+        getColumnNames = new JButton("Column names");
+        add(getColumnNames);
+        getColumnNames.setBounds(10, 220, 220, 30);
+
+        getColumnNames.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null, model.getColumnNames());
+            }
+        });
+
+        getTableNames = new JButton("Table names");
+        add(getTableNames);
+        getTableNames.setBounds(240, 220, 220, 30);
+
+        getTableNames.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null, model.getTableNames());
+            }
+        });
+
         setVisible(true);
-        setSize(485,265);
+        setSize(485,300);
     }
 
 }

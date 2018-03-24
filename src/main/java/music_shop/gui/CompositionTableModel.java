@@ -100,4 +100,12 @@ public class CompositionTableModel extends DefaultTableModel {
     public List<Composition> all(){
         return dao.selectCompositions();
     }
+
+    public String getColumnNames(){
+        return dao.getAllColumnNames();
+    }
+
+    public String getTableNames(){
+        return dao.getAllTableNames();
+    }
 }
