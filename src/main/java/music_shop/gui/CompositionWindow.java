@@ -63,6 +63,9 @@ public class CompositionWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 currentChoiceRow = table.getSelectedRow();
+                if(currentChoiceRow == -1){
+                    return;
+                }
                 dialog.setTitle("Edit composition");
                 dialog.setCompositionName(model.getValueAt(currentChoiceRow, 1).toString());
                 dialog.setCompositionLength(model.getValueAt(currentChoiceRow, 2).toString());
@@ -90,6 +93,9 @@ public class CompositionWindow extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 try {
                     currentChoiceRow = table.getSelectedRow();
+                    if(currentChoiceRow == -1){
+                        return;
+                    }
                     model.removeRow(currentChoiceRow);
                     table.revalidate();
                     table.repaint();
