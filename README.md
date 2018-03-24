@@ -1,2 +1,2 @@
 # MusicShop
-Simple Java FX application (laboratory work)
+Simple application with JDBC connection (laboratory work)
