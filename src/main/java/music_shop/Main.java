@@ -1,25 +1,34 @@
 package music_shop;
 
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-import java.net.URL;
+import music_shop.dao.DAO;
+import music_shop.dao.impl.DAOPostgre;
+import music_shop.gui.CompositionTableModel;
+import music_shop.gui.CompositionWindow;
 
-public class Main extends Application {
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.sql.SQLException;
 
-    @Override
-    public void start(Stage primaryStage) throws Exception{
-        URL url = getClass().getResource("/fxml/MainWindow.fxml");
-        Parent root = FXMLLoader.load(url);
-        primaryStage.setTitle("Music shop");
-        primaryStage.setScene(new Scene(root, 300, 275));
-        primaryStage.show();
-    }
-
+public class Main{
 
     public static void main(String[] args) {
-        launch(args);
+        final DAO dao = new DAOPostgre();
+        dao.setURL(DAOPostgre.DEFAULT_HOST, DAOPostgre.DEFAULT_DATABASE, DAOPostgre.DEFAULT_PORT);
+        dao.connect(DAOPostgre.DEFAULT_LOGIN, DAOPostgre.DEFAULT_PASSWORD);
+
+        CompositionTableModel tableModel = new CompositionTableModel(dao);
+        CompositionWindow windowPerformer = new CompositionWindow(tableModel);
+
+        windowPerformer.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                try {
+                    dao.getConnection().close();
+                } catch (SQLException sqlEx) {
+                    sqlEx.printStackTrace();
+                }
+                System.exit(0);
+            }
+        });
     }
 }
